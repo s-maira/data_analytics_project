@@ -1,0 +1,134 @@
+# Purpose of Project: To make a descriptive analysis about the survival rate of the passengers of Titanic
+
+# PART 1 : PRE-ANALYSIS
+
+# To find duplicate rows from passengers table
+
+SELECT 
+ PassengerId, Survived, Pclass, Name, 
+ Sex, Age, SibSp, Parch, Ticket, 
+ Fare, Cabin, Embarked, count(*)
+FROM passengers 
+GROUP BY 
+ PassengerId, Survived, Pclass, Name,
+ Sex, Age, SibSp, Parch, Ticket, 
+ Fare, Cabin, Embarked
+HAVING COUNT(*) > 1
+
+# To find the number of NULL Values and Non-NULL Values from age column
+
+SELECT 
+ SUM(
+  CASE WHEN Age is NULL THEN 1 ELSE 0 END) AS "Age Null Values",
+ COUNT(Age) AS "Age Non-Null Values" 
+FROM passengers
+
+# To find the number of NULL Values and Non-NULL Values from Cabin column
+
+SELECT 
+ SUM(CASE WHEN Cabin is NULL 
+ THEN 1 ELSE 0 END) 
+ AS "Cabin Null Values", 
+ COUNT(Cabin) AS "Cabin Non-Null
+ Values" 
+FROM passengers
+
+# To find the number of NULL Values and Non-NULL Values from Embarked column
+
+SELECT 
+ SUM(
+ CASE WHEN Embarked is NULL THEN 1 ELSE 0 END) AS "Embarked Null Values" ,
+ COUNT(Embarked) AS "Embarked Non-Null Values" 
+FROM passengers
+
+
+#PART 2: ANALYSIS
+
+# Question 1: Which age class has the highest survival rate?
+
+# The total number of passengers in Titanic group by age classification:
+
+SELECT
+ COUNT(Name) AS total_passengers,
+CASE
+ WHEN age < 18 THEN "children"
+ WHEN age >= 60 THEN "elderlies"
+ WHEN age >= 18 AND AGE < 60 THEN "adult"
+END AS age_classification
+FROM passengers
+GROUP BY age_classification
+
+# Total number of passengers survived the Titanic incident, classified by age
+
+SELECT 
+ COUNT(Survived) AS total_survivors,
+CASE
+ WHEN Age >= 60 THEN "elderlies"
+ WHEN Age < 18 THEN "children"
+ WHEN Age >= 18 AND Age < 60 THEN "adults"
+END AS survivor_age_class
+FROM passengers
+WHERE Survived = 1
+GROUP BY survivor_age_class
+
+
+Question 2 : Do the female passengers have higher survival rate than male?
+
+#Total number of females and males on Titanic
+
+SELECT 
+ Sex AS Gender,
+ COUNT(Name) AS Total_passengers 
+FROM passengers 
+GROUP BY Sex
+
+#Total number of females and males survived after the Titanic incident
+
+SELECT 
+ Sex AS Gender, 
+ COUNT(Survived) AS Total_survivors
+FROM passengers 
+WHERE Survived = 1
+GROUP BY Sex
+
+
+#Question 3 : Do the passengers’ Class status influence their survival rate?
+
+#Total number of passengers based on Class
+
+SELECT 
+ Pclass AS Passengers_class,
+ COUNT(Pclass) AS Total_passengers
+FROM passengers 
+GROUP BY Pclass
+
+#Total number of passengers survived the Titanic incident based on Class
+
+SELECT 
+ Pclass AS Passengers_class
+ COUNT(Pclass) AS Total_survivors
+FROM passengers 
+WHERE Survived = 1 
+GROUP BY Pclass
+
+
+#Question 4 : Which of the three ports of embark has the highest survival rate? And which passengers class dominated the specific port of embark
+
+#Total passengers based on their port of embark and their passengers’ class
+
+SELECT 
+ Embarked AS "Port of Embark", 
+ Pclass,
+ COUNT(Embarked) AS "Total Passengers"
+FROM passengers 
+GROUP by Embarked, Pclass
+
+#Total number of survivors based on their port of embark and passengers class
+
+SELECT 
+ Embarked AS "Port of Embark", 
+ Pclass,
+ COUNT(Embarked) AS "Number of Survivors"
+FROM passengers 
+WHERE Survived = 1
+GROUP by Embarked, Pclass
