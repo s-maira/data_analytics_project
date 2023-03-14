@@ -1,0 +1,25 @@
+﻿users column format changed to number
+users column : decrease decimal point x2
+new users column format changed to number
+new users column : decrease decimal point x2
+session column format changed to number
+session column : decrease decimal point x2
+bounce rate column : format changed to percent
+average sessions duration : format changed to duration
+transactions column : format changed to number
+revenue column : format changed to currency
+Ecommerce Conversion Rate : format changed to percent
+sort region :  A - Z
+region (not set) row : deleted
+"disctrict of columbia is a part of washington, so need to add both rows' values"
+users column : district of columbia + washington
+new users coloumn : district of columbia + washington
+sessions : district of columbia + washington
+bounce rate column : (total number of bounce of DC + total number of bounce washington) / (total session of DC + washington) 
+pages per session : (pages per session of DC overall + pages per session Washington overall)/(total session of DC + Washington)
+avg. session duration : (total session duration of DC + total session duration of washington) / (total session of DC + washington
+transactions column : add DC + washington
+revenue column : add DC + washington
+Ecommerce conversion rate : total transactions (DC + Washington) / total sessions (DC + Washington)
+"copy the new washington rows' values, paste special > values only"
+old washington and DC rows were deleted
