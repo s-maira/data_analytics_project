@@ -164,7 +164,7 @@ GROUP BY NUM_OF_CHILDREN
 ORDER BY NUM_OF_CHILDREN 
 
 
-# Analysis 3 : Are there any factors in the application table affecting the Credit Amount?
+# TASK 6 : Are there any factors in the application table affecting the Credit Amount?
 
 #PRE-ANALYSIS
 # TO CALCULATE THE NUMBER OF ROWS IN  AMT_CREDIT COLUMN FROM APPLICATION TABLE
